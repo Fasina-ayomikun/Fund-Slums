@@ -1262,3 +1262,6 @@ img {
 .show-form {
   display: flex;
 }
+.form-container #email {
+  text-transform:lowercase;
+}
