@@ -89,13 +89,23 @@ function Profile() {
       const accounts = await signer.getAddress();
 
       try {
+        let x = [];
         const transactionResponse = await contracts.getAddressCharities(
           accounts
         );
+
+        // for (let i = 0; i < transactionResponse.length; i++) {
+        //   if (transactionResponse[i][0] == accounts) {
+        //     x.push(transactionResponse[i]);
+        //   } else {
+        //     x.push(null);
+        //   }
+        // }
+
         setAllCharities(transactionResponse);
-        console.log(transactionResponse[0][0]);
-        console.log(transactionResponse[0][1]);
-        console.log(transactionResponse[0][7]);
+        console.log(x[0][0]);
+        console.log(x[0][1]);
+        console.log(x[0][7]);
 
         const definition = [];
 
@@ -129,35 +139,35 @@ function Profile() {
       <Form />
       <Withdrawer />
       <CreateForm />
-      <section className='profile-section'>
-        <div className='profile-container'>
-          <div className='profile-header'>
-            <div className='profile-info'>
-              <div className='profile-img'></div>
+      <section className="profile-section">
+        <div className="profile-container">
+          <div className="profile-header">
+            <div className="profile-info">
+              <div className="profile-img"></div>
               <div>
-                <p className='username'>Wallet Address</p>
-                <p className='wallet-address'>{address}</p>
+                <p className="username">Wallet Address</p>
+                <p className="wallet-address">{address}</p>
               </div>
             </div>
-            <div className='profile-btns'>
-              <button className='donate-btn' onClick={openModal}>
+            <div className="profile-btns">
+              <button className="donate-btn" onClick={openModal}>
                 donate now
               </button>
-              <button className='donate-btn' onClick={openCreate}>
+              <button className="donate-btn" onClick={openCreate}>
                 Create GoFund Me
               </button>
             </div>
           </div>
-          <div className='profile-content'>
+          <div className="profile-content">
             <div>
-              <p className='active-profile'>Your Charities</p>
+              <p className="active-profile">Your Charities</p>
             </div>
             {allCharities ? (
               allCharities.map((charity, index) => {
                 return (
-                  <div key={index} className='info'>
+                  <div key={charity.charityId} className="info">
                     <BsArrowUpRight
-                      id={index}
+                      id={charity.charityId}
                       onClick={(e) => {
                         openWithdrawer();
                         setId(e.target);
